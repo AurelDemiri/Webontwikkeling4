@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class GetFriends extends RequestHandler {
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public String handleRequest(HttpServletRequest request,
@@ -19,7 +20,6 @@ public class GetFriends extends RequestHandler {
         }
         else {
             List<User> friends = getLoggedInUser(request).getFriends();
-            ObjectMapper mapper = new ObjectMapper();
             String friendsJSON = mapper.writeValueAsString(friends);
             response.setContentType("application/json");
             response.getWriter().write(friendsJSON);
