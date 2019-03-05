@@ -9,7 +9,7 @@ var newFriendUsernameTextElement = document.getElementById("newfriendusername");
 
 var xhr = new XMLHttpRequest();
 
-var timer = setInterval(updateFriendsList, 5000);
+setInterval(updateFriendsList, 5000);
 
 function changeStatus() {
     if (newStatusElement.value.length > 0) {
@@ -20,7 +20,7 @@ function changeStatus() {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 currentStatusTextElement.innerHTML = newStatusElement.value;
             }
-        }
+        };
         xhr.send("newstatus=" + newStatusElement.value);
     } else {
         alert("Status can not be empty!");
@@ -42,7 +42,7 @@ function addFriend() {
                     alert("User does not exist or there was a server error!");
                 }
             }
-        }
+        };
         xhr.send("username=" + newFriendUsernameTextElement.value);
     } else {
         alert("Username can not be empty!");
@@ -57,7 +57,7 @@ function updateFriendsList() {
             var tbody = document.getElementsByTagName("TBODY")[0];
 
             // Clear tbody html
-            tbody.innerHTML = ""
+            tbody.innerHTML = "";
 
             // Update tbody
             for (var i = 0; i < friends.length; i++) {
@@ -72,6 +72,6 @@ function updateFriendsList() {
                 tbody.appendChild(row);
             }
         }
-    }
+    };
     xhr.send();
 }
