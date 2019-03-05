@@ -6,16 +6,16 @@ import java.util.List;
 
 public interface UserRepository {
 
-    public abstract void add(User user);
+    void add(User user);
 
-    public abstract void delete(String userId);
+    void delete(String userId);
 
-    public abstract User get(String userId);
+    User get(String userId);
 
-    public abstract List<User> getAll();
+    List<User> getAll();
 
-    public abstract User getAuthenticatedUser(String email, String password);
+    User getAuthenticatedUser(String email, String password);
 
-    public abstract void update(User user);
+    void update(User user);
 
 }

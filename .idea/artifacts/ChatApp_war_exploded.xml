@@ -12,6 +12,7 @@
           <element id="library" level="project" name="jackson-core-2.7.4" />
           <element id="library" level="project" name="jackson-databind-2.7.4" />
           <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="websocket-api" />
         </element>
       </element>
     </root>

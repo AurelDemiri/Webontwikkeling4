@@ -1,6 +1,6 @@
 package controller;
 
-import domain.UserService;
+import domain.ChatService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,6 @@ import java.util.List;
 public class Controller extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private UserService model = new UserService();
     private ControllerFactory controllerFactory = new ControllerFactory();
 
     public Controller() {
@@ -36,17 +35,16 @@ public class Controller extends HttpServlet {
                                   HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String destination = "index.jsp";
-        if (action != null) {
-            RequestHandler handler;
-            try {
-                handler = controllerFactory.getController(action, model);
-                destination = handler.handleRequest(request, response);
-            } catch (NotAuthorizedException exc) {
-                List<String> errors = new ArrayList<String>();
-                errors.add(exc.getMessage());
-                request.setAttribute("errors", errors);
-                destination = "index.jsp";
-            }
+
+        RequestHandler handler;
+        try {
+            handler = controllerFactory.getController(action == null ? "Home" : action, ChatService.getInstance());
+            destination = handler.handleRequest(request, response);
+        } catch (NotAuthorizedException exc) {
+            List<String> errors = new ArrayList<>();
+            errors.add(exc.getMessage());
+            request.setAttribute("errors", errors);
+            destination = "index.jsp";
         }
 
         if (!destination.isEmpty() && response.getStatus() != HttpServletResponse.SC_MOVED_TEMPORARILY) {

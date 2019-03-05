@@ -1,7 +1,7 @@
 package controller;
 
 import domain.User;
-import domain.UserService;
+import domain.ChatService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +32,8 @@ public class LogIn extends RequestHandler {
         }
 
         if (errors.size() == 0) {
-            UserService userService = super.getUserService();
-            User user = userService.getAuthenticatedUser(username, password);
+            ChatService chatService = super.getChatService();
+            User user = chatService.getAuthenticatedUser(username, password);
             if (user != null) {
                 createSession(user, request, response);
                 response.sendRedirect("/");

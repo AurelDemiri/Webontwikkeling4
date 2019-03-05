@@ -12,7 +12,7 @@ public class AddFriend extends RequestHandler {
     public String handleRequest(HttpServletRequest request,
                                 HttpServletResponse response) throws IOException {
         User myUser = getLoggedInUser(request);
-        User userToAdd = getUserService().getUser(request.getParameter("username"));
+        User userToAdd = getChatService().getUser(request.getParameter("username"));
 
         if (!isUserLoggedIn(request) || userToAdd == null || userToAdd.equals(myUser)) {
             // We use setStatus instead of sendError to prevent a useless body being sent to client.
